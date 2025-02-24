@@ -30,6 +30,7 @@ function update() {
     clear();
     moveSpaceship();
     drawSpaceship();
+    drawLasers();
     requestAnimationFrame(update);
 }
 
@@ -65,7 +66,7 @@ function keyUp(e) {
 }
 
 function shootLaser() {
-    lasers.push({ x: spaceship.x + spaceship.width, y: spaceship.y + spaceship.height / 2, width: 10, height: 2, speed: 8 });
+    lasers.push({ x: spaceship.x + spaceship.width, y: spaceship.y + spaceship.height / 2 - 1, width: 10, height: 2, speed: 8 });
 }
 
 function drawLasers() {
@@ -74,6 +75,7 @@ function drawLasers() {
         laser.x += laser.speed;
         ctx.fillRect(laser.x, laser.y, laser.width, laser.height);
 
+        // Remove laser if it goes off screen
         if (laser.x > canvas.width) lasers.splice(index, 1);
     });
 }
