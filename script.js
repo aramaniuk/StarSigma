@@ -4,6 +4,9 @@ const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 600;
 
+const spaceshipImage = new Image();
+spaceshipImage.src = 'spaceship.png';
+
 const spaceship = {
     x: 50,
     y: canvas.height / 2 - 25,
@@ -11,7 +14,8 @@ const spaceship = {
     height: 50,
     speed: 5,
     dx: 0,
-    dy: 0
+    dy: 0,
+    image: spaceshipImage
 };
 
 const obstacles = [];
@@ -19,8 +23,7 @@ const lasers = [];
 const keys = {};
 
 function drawSpaceship() {
-    ctx.fillStyle = 'white';
-    ctx.fillRect(spaceship.x, spaceship.y, spaceship.width, spaceship.height);
+    ctx.drawImage(spaceship.image, spaceship.x, spaceship.y, spaceship.width, spaceship.height);
 }
 
 function update() {
@@ -78,4 +81,6 @@ function drawLasers() {
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 
-update();
+spaceshipImage.onload = function() {
+    update();
+};
